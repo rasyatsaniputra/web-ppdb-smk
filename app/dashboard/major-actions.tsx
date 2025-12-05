@@ -1,3 +1,5 @@
+"use server";
+
 import { RowDataPacket } from "mysql2";
 import connection from "../lib/db";
 import { Major } from "../lib/models/major-model";

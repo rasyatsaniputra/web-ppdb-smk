@@ -1,3 +1,5 @@
+"use server";
+
 import { RowDataPacket } from "mysql2";
 import connection from "../lib/db";
 import { Track } from "../lib/models/track-model";
