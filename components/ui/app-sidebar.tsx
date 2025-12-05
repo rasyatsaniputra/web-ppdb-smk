@@ -27,7 +27,7 @@ export default async function AppSidebar() {
     },
     {
       title: "Formulir",
-      url: "/dashboard/application",
+      url: "/dashboard/student/application",
       icon: Form,
     },
   ];
@@ -40,7 +40,7 @@ export default async function AppSidebar() {
     },
     {
       title: "Data Pendaftar",
-      url: "/dashboard/applications",
+      url: "/dashboard/admin/applications",
       icon: Form,
     },
   ];
