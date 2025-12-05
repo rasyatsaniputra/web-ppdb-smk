@@ -5,13 +5,13 @@ import { ResultSetHeader } from "mysql2";
 import { Document } from "../lib/models/document-model";
 
 export async function createDocument(values: Document) {
-  const { application_id, document_type, path } = values;
+  const { user_id, document_type, path } = values;
 
   try {
     const [rows] = await connection.execute<ResultSetHeader>(
-      `INSERT INTO documents (application_id, document_type, path)
+      `INSERT INTO documents (user_id, document_type, path)
        VALUES (?, ?, ?)`,
-      [application_id, document_type, path]
+      [user_id, document_type, path]
     );
 
     return { success: true, documentId: rows.insertId };
