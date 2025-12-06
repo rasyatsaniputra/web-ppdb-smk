@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import { getApplicationByUserId } from "../../application-actions";
 import ApplicationForm from "../../components/application-form";
 import { getAllMajors } from "../../major-actions";
@@ -29,18 +28,20 @@ export default async function StudentApplicationPage() {
     return (
       <div>
         <ApplicationSummary
-          applicationId={applicationData.id}
-          fullName={applicationData.full_name}
-          nisn={applicationData.nisn}
-          address={applicationData.address}
-          phone={applicationData.phone}
-          placeOfBirth={applicationData.place_of_birth}
-          dateOfBirth={applicationData.date_of_birth}
-          gender={applicationData.gender}
-          previousSchoolName={applicationData.previous_school_name}
-          religion={applicationData.religion_name}
-          major={applicationData.major_name}
-          track={applicationData.track_name}
+          data={{
+            applicationId: applicationData.id,
+            fullName: applicationData.full_name,
+            nisn: applicationData.nisn,
+            address: applicationData.address,
+            phone: applicationData.phone,
+            placeOfBirth: applicationData.place_of_birth,
+            dateOfBirth: applicationData.date_of_birth,
+            gender: applicationData.gender,
+            previousSchoolName: applicationData.previous_school_name,
+            religion: applicationData.religion_name,
+            major: applicationData.major_name,
+            track: applicationData.track_name,
+          }}
         />
       </div>
     );

@@ -1,64 +1,55 @@
 "use client";
 
+import { deleteApplication } from "../application-actions";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { PencilLine } from "lucide-react";
 import Link from "next/link";
-import ApplicationDeleteButton from "./application-delete-button";
 import { toast } from "sonner";
-import { deleteApplication } from "../application-actions";
+import ApplicationDeleteButton from "./application-delete-button";
 
 interface ApplicationSummaryProps {
-  applicationId: number;
-  fullName: string;
-  nisn: string;
-  address: string;
-  phone: string;
-  placeOfBirth: string;
-  dateOfBirth: string | Date;
-  gender: "M" | "F";
-  previousSchoolName: string;
-  religion: string;
-  major: string;
-  track: string;
+  data: {
+    applicationId: number;
+    fullName: string;
+    nisn: string;
+    address: string;
+    phone: string;
+    placeOfBirth: string;
+    dateOfBirth: string | Date;
+    gender: "M" | "F";
+    previousSchoolName: string;
+    religion: string;
+    major: string;
+    track: string;
+  };
 }
 
-export default function ApplicationSummary(props: ApplicationSummaryProps) {
-  const {
-    applicationId,
-    fullName,
-    nisn,
-    address,
-    phone,
-    placeOfBirth,
-    dateOfBirth,
-    gender,
-    previousSchoolName,
-    religion,
-    major,
-    track,
-  } = props;
-
+export default function ApplicationSummary({ data }: ApplicationSummaryProps) {
   const formatDate = (date: string | Date) =>
-    date instanceof Date ? date.toLocaleDateString() : date;
+    new Date(date).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   const summaryItems = [
-    { label: "Nama Lengkap", value: fullName },
-    { label: "NISN", value: nisn },
-    { label: "Alamat", value: address },
-    { label: "No HP", value: phone },
+    { label: "Nama Lengkap", value: data.fullName },
+    { label: "NISN", value: data.nisn },
+    { label: "Alamat", value: data.address },
+    { label: "No HP", value: data.phone },
     {
       label: "Tempat / Tanggal Lahir",
-      value: `${placeOfBirth}, ${formatDate(dateOfBirth)}`,
+      value: `${data.placeOfBirth}, ${formatDate(data.dateOfBirth)}`,
     },
     {
       label: "Jenis Kelamin",
-      value: gender === "M" ? "Laki-Laki" : "Perempuan",
+      value: data.gender === "M" ? "Laki-Laki" : "Perempuan",
     },
-    { label: "Sekolah Asal", value: previousSchoolName },
-    { label: "Agama", value: religion },
-    { label: "Jurusan", value: major },
-    { label: "Jalur Pendaftaran", value: track },
+    { label: "Sekolah Asal", value: data.previousSchoolName },
+    { label: "Agama", value: data.religion },
+    { label: "Jurusan", value: data.major },
+    { label: "Jalur Pendaftaran", value: data.track },
   ];
 
   async function onDelete(userId: number) {
@@ -87,7 +78,9 @@ export default function ApplicationSummary(props: ApplicationSummaryProps) {
               <PencilLine /> Edit Data
             </Link>
           </Button>
-          <ApplicationDeleteButton onDelete={() => onDelete(applicationId)} />
+          <ApplicationDeleteButton
+            onDelete={() => onDelete(data.applicationId)}
+          />
         </div>
       </div>
       <Separator />

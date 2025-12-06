@@ -127,7 +127,7 @@ export async function getApplicationByUserId(id: number) {
 }
 
 export async function updateApplication(
-  id: number,
+  userId: number,
   values: Partial<Application>
 ) {
   try {
@@ -136,8 +136,8 @@ export async function updateApplication(
     const params = Object.values(values);
 
     const [rows] = await connection.execute<ResultSetHeader>(
-      `UPDATE applications SET ${placeholders} WHERE id = ?`,
-      [...params, id]
+      `UPDATE applications SET ${placeholders} WHERE user_id = ?`,
+      [...params, userId]
     );
 
     return { success: true };
