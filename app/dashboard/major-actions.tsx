@@ -10,7 +10,7 @@ export async function getAllMajors() {
       "SELECT * FROM majors"
     );
 
-    return { success: true, religions: rows as Major[] };
+    return { success: true, majors: rows as Major[] };
   } catch (err: any) {
     return { success: false, error: "Gagal mengambil data." };
   }
