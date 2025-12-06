@@ -10,7 +10,7 @@ export default function DashboardLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>{children}</main>;
+      <main className="w-full p-8 bg-gray-200">{children}</main>
     </SidebarProvider>
   );
 }
