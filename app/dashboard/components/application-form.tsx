@@ -18,6 +18,7 @@ import {
 import { createApplication } from "../application-actions";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { Separator } from "@/components/ui/separator";
 
 interface SelectProps {
   religionData: Religion[];
@@ -115,87 +116,91 @@ export default function ApplicationForm({
   }
 
   return (
-    <form ref={formRef} action={onSubmit} className="p-8 space-y-4">
-      <div className="grid grid-cols-2 gap-4 space-y-4">
-        <TextInputField
-          label="Nama Lengkap"
-          name="full_name"
-          placeholder="Masukkan Nama Lengkap"
-        />
-        <TextInputField
-          label="NISN"
-          name="nisn"
-          type="number"
-          placeholder="Masukkan NISN"
-        />
-        <TextInputField
-          label="Alamat"
-          name="address"
-          placeholder="Masukkan Alamat"
-        />
-        <TextInputField
-          label="No HP"
-          name="phone"
-          type="tel"
-          placeholder="Masukkan No HP"
-        />
-        <TextInputField
-          label="Tempat Lahir"
-          name="place_of_birth"
-          placeholder="Masukkan Tempat Lahir"
-        />
-        <TextInputField
-          label="Sekolah Asal"
-          name="previous_school_name"
-          placeholder="Masukkan Sekolah Asal"
-        />
-        <TextInputField
-          label="Tanggal Lahir"
-          name="date_of_birth"
-          type="date"
-        />
-        <SelectField
-          label="Jenis Kelamin"
-          name="gender"
-          options={[
-            { value: "M", label: "Laki-Laki" },
-            { value: "F", label: "Perempuan" },
-          ]}
-        />
-        <SelectField
-          label="Agama"
-          name="religion"
-          options={religionData.map((r) => ({
-            value: String(r.id),
-            label: r.name,
-          }))}
-        />
-        <SelectField
-          label="Jurusan"
-          name="major"
-          options={majorData.map((m) => ({
-            value: String(m.id),
-            label: m.name,
-          }))}
-        />
-        <SelectField
-          label="Jalur Pendaftaran"
-          name="track"
-          options={trackData.map((t) => ({
-            value: String(t.id),
-            label: t.name,
-          }))}
-        />
-      </div>
-      <div>
-        <Label>Akta Kelahiran</Label>
-        <UploadDropzone endpoint="birthCertificateUploader" />
-      </div>
-      <div>
-        <Label>Kartu Keluarga</Label>
-        <UploadDropzone endpoint="familyCardUploader" />
-      </div>
-      <Button type="submit">Kirim Pendaftaran</Button>
-    </form>
+    <div className="bg-white rounded-md shadow">
+      <h1 className="px-8 py-6 text-xl font-bold">Formulir Pendaftaran</h1>
+      <Separator />
+      <form ref={formRef} action={onSubmit} className="p-8 space-y-4">
+        <div className="grid grid-cols-2 gap-4 space-y-4">
+          <TextInputField
+            label="Nama Lengkap"
+            name="full_name"
+            placeholder="Masukkan Nama Lengkap"
+          />
+          <TextInputField
+            label="NISN"
+            name="nisn"
+            type="number"
+            placeholder="Masukkan NISN"
+          />
+          <TextInputField
+            label="Alamat"
+            name="address"
+            placeholder="Masukkan Alamat"
+          />
+          <TextInputField
+            label="No HP"
+            name="phone"
+            type="tel"
+            placeholder="Masukkan No HP"
+          />
+          <TextInputField
+            label="Tempat Lahir"
+            name="place_of_birth"
+            placeholder="Masukkan Tempat Lahir"
+          />
+          <TextInputField
+            label="Sekolah Asal"
+            name="previous_school_name"
+            placeholder="Masukkan Sekolah Asal"
+          />
+          <TextInputField
+            label="Tanggal Lahir"
+            name="date_of_birth"
+            type="date"
+          />
+          <SelectField
+            label="Jenis Kelamin"
+            name="gender"
+            options={[
+              { value: "M", label: "Laki-Laki" },
+              { value: "F", label: "Perempuan" },
+            ]}
+          />
+          <SelectField
+            label="Agama"
+            name="religion"
+            options={religionData.map((r) => ({
+              value: String(r.id),
+              label: r.name,
+            }))}
+          />
+          <SelectField
+            label="Jurusan"
+            name="major"
+            options={majorData.map((m) => ({
+              value: String(m.id),
+              label: m.name,
+            }))}
+          />
+          <SelectField
+            label="Jalur Pendaftaran"
+            name="track"
+            options={trackData.map((t) => ({
+              value: String(t.id),
+              label: t.name,
+            }))}
+          />
+        </div>
+        <div>
+          <Label>Akta Kelahiran</Label>
+          <UploadDropzone endpoint="birthCertificateUploader" />
+        </div>
+        <div>
+          <Label>Kartu Keluarga</Label>
+          <UploadDropzone endpoint="familyCardUploader" />
+        </div>
+        <Button type="submit">Kirim Pendaftaran</Button>
+      </form>
+    </div>
   );
 }
