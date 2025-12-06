@@ -25,27 +25,25 @@ export default async function StudentApplicationPage() {
   const application = await getApplicationByUserId(userId);
   const applicationData = application.application;
 
-  console.log(applicationData);
-
-  // if (applicationData) {
-  //   return (
-  //     <div>
-  //       <ApplicationSummary
-  //         fullName={applicationData.full_name}
-  //         nisn={applicationData.nisn}
-  //         address={applicationData.address}
-  //         phone={applicationData.phone}
-  //         placeOfBirth={applicationData.place_of_birth}
-  //         dateOfBirth={applicationData.date_of_birth}
-  //         gender={applicationData.gender}
-  //         previousSchoolName={applicationData.previous_school_name}
-  //         religion={applicationData.religion_name}
-  //         major={applicationData.major_name}
-  //         track={applicationData.track_name}
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (applicationData) {
+    return (
+      <div>
+        <ApplicationSummary
+          fullName={applicationData.full_name}
+          nisn={applicationData.nisn}
+          address={applicationData.address}
+          phone={applicationData.phone}
+          placeOfBirth={applicationData.place_of_birth}
+          dateOfBirth={applicationData.date_of_birth}
+          gender={applicationData.gender}
+          previousSchoolName={applicationData.previous_school_name}
+          religion={applicationData.religion_name}
+          major={applicationData.major_name}
+          track={applicationData.track_name}
+        />
+      </div>
+    );
+  }
 
   return (
     <ApplicationForm
