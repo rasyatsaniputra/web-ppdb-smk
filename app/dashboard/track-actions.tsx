@@ -10,7 +10,7 @@ export async function getAllTracks() {
       "SELECT * FROM tracks"
     );
 
-    return { success: true, religions: rows as Track[] };
+    return { success: true, tracks: rows as Track[] };
   } catch (err: any) {
     return { success: false, error: "Gagal mengambil data." };
   }
