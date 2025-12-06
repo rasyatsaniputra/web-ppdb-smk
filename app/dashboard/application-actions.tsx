@@ -20,6 +20,22 @@ export async function createApplication(values: Application) {
     track_id,
   } = values;
 
+  if (!full_name) return { success: false, error: "Nama lengkap wajib diisi." };
+  if (!nisn) return { success: false, error: "NISN wajib diisi." };
+  if (!address) return { success: false, error: "Alamat wajib diisi." };
+  if (!phone) return { success: false, error: "No HP wajib diisi." };
+  if (!place_of_birth)
+    return { success: false, error: "Tempat lahir wajib diisi." };
+  if (!date_of_birth)
+    return { success: false, error: "Tanggal lahir wajib diisi." };
+  if (!gender) return { success: false, error: "Jenis kelamin wajib diisi." };
+  if (!previous_school_name)
+    return { success: false, error: "Sekolah asal wajib diisi." };
+  if (!religion_id) return { success: false, error: "Agama wajib diisi." };
+  if (!major_id) return { success: false, error: "Jurusan wajib diisi." };
+  if (!track_id)
+    return { success: false, error: "Jalur pendaftaran wajib diisi." };
+
   try {
     const [rows] = await connection.execute<ResultSetHeader>(
       `INSERT INTO applications 
