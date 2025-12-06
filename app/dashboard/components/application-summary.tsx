@@ -1,9 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { PencilLine } from "lucide-react";
 import Link from "next/link";
+import ApplicationDeleteButton from "./application-delete-button";
+import { toast } from "sonner";
+import { deleteApplication } from "../application-actions";
 
 interface ApplicationSummaryProps {
+  applicationId: number;
   fullName: string;
   nisn: string;
   address: string;
@@ -19,6 +25,7 @@ interface ApplicationSummaryProps {
 
 export default function ApplicationSummary(props: ApplicationSummaryProps) {
   const {
+    applicationId,
     fullName,
     nisn,
     address,
@@ -54,15 +61,34 @@ export default function ApplicationSummary(props: ApplicationSummaryProps) {
     { label: "Jalur Pendaftaran", value: track },
   ];
 
+  async function onDelete(userId: number) {
+    const res = await deleteApplication(userId);
+
+    if (res.success) {
+      toast.success("Berhasil menghapus data formulir.", {
+        position: "top-right",
+        style: { backgroundColor: "green", color: "white" },
+      });
+    } else {
+      toast.error(res.error, {
+        position: "top-right",
+        style: { backgroundColor: "red", color: "white" },
+      });
+    }
+  }
+
   return (
     <div className="p-8 bg-white rounded-md shadow space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Ringkasan Pendaftaran</h1>
-        <Button asChild>
-          <Link href="/dashboard">
-            <PencilLine /> Edit Data
-          </Link>
-        </Button>
+        <div className="flex gap-4">
+          <Button asChild>
+            <Link href="/dashboard">
+              <PencilLine /> Edit Data
+            </Link>
+          </Button>
+          <ApplicationDeleteButton onDelete={() => onDelete(applicationId)} />
+        </div>
       </div>
       <Separator />
       <div className="flex flex-col gap-4">

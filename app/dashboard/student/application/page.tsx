@@ -29,6 +29,7 @@ export default async function StudentApplicationPage() {
     return (
       <div>
         <ApplicationSummary
+          applicationId={applicationData.id}
           fullName={applicationData.full_name}
           nisn={applicationData.nisn}
           address={applicationData.address}
