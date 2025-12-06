@@ -116,11 +116,11 @@ export default function ApplicationForm({
   }
 
   return (
-    <div className="bg-white rounded-md shadow">
-      <h1 className="px-8 py-6 text-xl font-bold">Formulir Pendaftaran</h1>
+    <div className="p-8 space-y-4 bg-white rounded-md shadow">
+      <h1 className="text-xl font-bold">Formulir Pendaftaran</h1>
       <Separator />
-      <form ref={formRef} action={onSubmit} className="p-8 space-y-4">
-        <div className="grid grid-cols-2 gap-4 space-y-4">
+      <form ref={formRef} action={onSubmit} className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
           <TextInputField
             label="Nama Lengkap"
             name="full_name"
