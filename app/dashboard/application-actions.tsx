@@ -100,10 +100,10 @@ export async function getApplicationById(id: number) {
 export async function getApplicationByUserId(id: number) {
   try {
     const [rows] = await connection.execute<RowDataPacket[]>(
-      `SELECT * FROM applications WHERE user_id = ?`,
+      `SELECT a.id, a.user_id, a.full_name, a.nisn, a.address, a.phone, a.place_of_birth, a.date_of_birth, a.gender, a.previous_school_name, a.registration_date, a.status, r.id AS religion_id, r.name AS religion_name, m.id AS major_id, m.name AS major_name, t.id AS track_id, t.name AS track_name FROM applications a JOIN religions r ON a.religion_id = r.id JOIN majors m ON a.major_id = m.id JOIN tracks t ON a.track_id = t.id WHERE a.user_id = ?;`,
       [id]
     );
-    return { success: true, application: rows[0] as Application | null };
+    return { success: true, application: rows[0] || null };
   } catch (err: any) {
     console.error(err);
     return { success: false, error: "Gagal mengambil data." };
