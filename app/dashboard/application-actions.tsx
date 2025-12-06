@@ -97,6 +97,19 @@ export async function getApplicationById(id: number) {
   }
 }
 
+export async function getApplicationByUserId(id: number) {
+  try {
+    const [rows] = await connection.execute<RowDataPacket[]>(
+      `SELECT * FROM applications WHERE user_id = ?`,
+      [id]
+    );
+    return { success: true, application: rows[0] as Application | null };
+  } catch (err: any) {
+    console.error(err);
+    return { success: false, error: "Gagal mengambil data." };
+  }
+}
+
 export async function updateApplication(
   id: number,
   values: Partial<Application>
