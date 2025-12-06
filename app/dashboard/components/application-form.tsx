@@ -19,6 +19,7 @@ import { createApplication } from "../application-actions";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
 
 interface SelectProps {
   religionData: Religion[];
@@ -79,6 +80,8 @@ export default function ApplicationForm({
   majorData,
   trackData,
 }: SelectProps) {
+  const router = useRouter();
+
   const formRef = useRef<HTMLFormElement>(null);
   const { data: session } = useSession();
 
@@ -107,6 +110,8 @@ export default function ApplicationForm({
         position: "top-right",
         style: { backgroundColor: "green", color: "white" },
       });
+
+      router.refresh();
     } else {
       toast.error(res?.error, {
         position: "top-right",

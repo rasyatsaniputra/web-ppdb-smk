@@ -83,7 +83,7 @@ export default function ApplicationSummary(props: ApplicationSummaryProps) {
         <h1 className="text-xl font-bold">Ringkasan Pendaftaran</h1>
         <div className="flex gap-4">
           <Button asChild>
-            <Link href="/dashboard">
+            <Link href="/dashboard/student/application/edit">
               <PencilLine /> Edit Data
             </Link>
           </Button>
