@@ -9,7 +9,7 @@ export interface Application {
   date_of_birth: string | Date;
   gender: "M" | "F";
   previous_school_name: string;
-  registration_date: string | Date;
+  registration_date?: string | Date;
   religion_id: number;
   major_id: number;
   track_id: number;
