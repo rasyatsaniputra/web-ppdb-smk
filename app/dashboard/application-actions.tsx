@@ -43,8 +43,11 @@ export async function createApplication(values: Application) {
 
     return { success: true, applicationId: rows.insertId };
   } catch (err: any) {
-    console.error(err);
-    return { success: false, error: "Gagal membuat aplikasi." };
+    if (err.code === "ER_DUP_ENTRY") {
+      return { success: false, error: "Pendaftaran sudah terkirim." };
+    }
+
+    return { success: false, error: "Gagal membuat formulir." };
   }
 }
 
@@ -55,7 +58,6 @@ export async function getAllApplications() {
     );
     return { success: true, applications: rows as Application[] };
   } catch (err: any) {
-    console.error(err);
     return { success: false, error: "Gagal membuat formulir." };
   }
 }
@@ -78,7 +80,6 @@ export async function getAllApplicationsWithRelations() {
 
     return { success: true, applications: rows };
   } catch (err: any) {
-    console.error(err);
     return { success: false, error: "Gagal mengambil data." };
   }
 }
@@ -122,7 +123,6 @@ export async function deleteApplication(id: number) {
     await connection.execute(`DELETE FROM applications WHERE id = ?`, [id]);
     return { success: true };
   } catch (err: any) {
-    console.error(err);
     return { success: false, error: "Gagal menghapus formulir." };
   }
 }
